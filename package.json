@@ -1,8 +1,8 @@
 {
-  "name": "learn-pubsub",
+  "name": "@js-utils/pubsub",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "simple package to learn and use how pubsub works",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
