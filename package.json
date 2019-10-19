@@ -1,11 +1,21 @@
 {
-  "name": "@js-utils/pubsub",
+  "name": "@util-js/pubsub",
   "version": "1.0.0",
   "description": "simple package to learn and use how pubsub works",
   "main": "src/index.js",
+  "module": "dist/foo.modern.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "clean": "rm -rf dist",
+    "test": "mocha src/test.js"
   },
   "author": "Ajaykumar Prathap",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "rollup": "^1.23.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
 }

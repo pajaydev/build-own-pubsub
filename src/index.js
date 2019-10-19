@@ -94,6 +94,8 @@
 *  We can start diving into coding.
 */
 
+'use strict';
+
 class Pubsub {
     constructor() {
         this._pubsub = {};
@@ -113,9 +115,11 @@ class Pubsub {
      */
     emit(eventName) {
         this._pubsub[eventName] = this._pubsub[eventName] || [];
-        this._pubsub[eventName].map((listener) => {
-            listener.apply(arguments);
-        });
+        // create a new copy of listeners.
+        const listeners = Array.prototype.slice.call(this._pubsub[eventName]);
+        for (let i = 0, len = listeners.length; i < len; i++) {
+            listeners[i].apply(this, arguments);
+        }
     }
     /**
      * remove listener from the given event Name.
@@ -132,10 +136,11 @@ class Pubsub {
      * @param {Function} listener 
      */
     once(eventName, listener) {
-        this.on(eventName, () => {
-            this.removeListener(eventName, listener);
+        const func = () => {
+            this.removeListener(eventName, func);
             listener.apply(this, arguments);
-        });
+        }
+        this.on(eventName, func);
     }
     /**
      * remove all events from the pubsub.
