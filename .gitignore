@@ -1,3 +1,4 @@
 .cache
+sample.js
 dist/
 node_modules/

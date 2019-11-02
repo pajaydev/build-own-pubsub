@@ -12,6 +12,14 @@
  * 3. It makes easy to test the components.
  * 4. It reduces the dependency among the modules, we can avoid duplicate code in the application.
  * 
+ * Overview
+ * --------
+ * 
+ * 1. Topic (EVENTS) – An intermediary channel that maintains a list of subscribers to send messages to that are received from publishers
+ * 2. Message – Serialized messages sent to a topic by a publisher which has no knowledge of the subscribers
+ * 3. Publisher – The application that publishes a message to a topic.
+ * 4. Subscriber(listener) – An application that registers itself with the desired topic in order to receive the appropriate messages.
+ * 
  * Example
  * --------
  * To explain it better, let's go through an example
@@ -91,17 +99,17 @@
  * 1. on (add Listener)
  *    syntax:
  *    pubsub.on(EVENT_NAME, listener);
- *    Add the listener to that particular event name.
+ *    Add the listener to that particular event(Topic) name.
  * 
  * 2. off (remove Listener)
  *    syntax:
  *    pubsub.off(EVENT_NAME, listener);
- *    remove the particular listener from that particular event name.
+ *    remove the particular listener from that particular event name (Topic).
  * 
  * 3. emit (call all Listeners subscribed to this event)
  *    syntax:
  *    pubsub.emit(EVENT_NAME, data);
- *    call all the listeners registered for this event with the given data.
+ *    call all the listeners registered for this event(Topic) with the given data.
  * 
  * 4. once (call Listener once)
  *    syntax:
@@ -111,7 +119,7 @@
  * 5. removeAll ()
  *    syntax:
  *    pubsub.removeAll();
- *    clears the pubsub by removing all the events. 
+ *    clears the pubsub by removing all the events(Topics). 
  */
 
 /**
@@ -180,9 +188,7 @@ class Pubsub {
      * @param {String} eventName optional
      */
     removeListener(eventName, listener) {
-        if (this._pubsub[eventName].indexOf(listener) > -1) {
-            this._pubsub[eventName].splice(this._pubsub[eventName].indexOf(listener), 1);
-        }
+        this._pubsub[eventName] = this._pubsub[eventName].filter(func => func !== listener);
     }
 
 }

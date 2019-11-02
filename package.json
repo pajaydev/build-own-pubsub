@@ -1,6 +1,6 @@
 {
-  "name": "@util-js/pubsub",
-  "version": "1.2.0",
+  "name": "build-pubsub",
+  "version": "1.0.0",
   "description": "simple package to learn and use how pubsub works",
   "scripts": {
     "build": "rollup -c",
